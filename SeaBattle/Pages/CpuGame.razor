@@ -1,0 +1,39 @@
+﻿@page "/cpugame/{Name}"
+
+@using Microsoft.AspNetCore.SignalR.Client
+@using SeaBattle.Components;
+@using SeaBattleEngine;
+
+@inject NavigationManager Navigation
+@inject IJSRuntime jsRuntime
+
+<PageTitle>Sea Battle</PageTitle>
+
+<div class="game-container" @ref="gameContainer" tabindex="0" @onkeydown="_gameHelper.KeyDownHandler">
+    <div>
+        <img class="title" src="assets/seabattle-title.png" alt="Sea Battle"/>
+    </div>
+    @if (isInitialized)
+    {
+        <div class="instructions">
+            <span>
+                @_gameHelper.Instructions
+                <span hidden="@(_gameHelper.Game.Mode != GameMode.End)">
+                    &nbsp;Play again?
+                    <input type="button" class="restartbtn" value="Yes" @onclick="e => _gameHelper.RestartHandler(true)" />
+                    <input type="button" class="restartbtn" value="No" @onclick="e => _gameHelper.RestartHandler(false)" />
+                </span>
+            </span>
+        </div>
+        <div class="sea-battle-container">
+            <div>
+                <h3>@_gameHelper.Game.Opponent?.Name</h3>
+                <PlayerMap @ref="opponentMapComponent" Map="@_gameHelper.Game.Opponent!.Map" @onmouseup="_gameHelper.OpponentMapMouseUpHandler" />
+            </div>
+            <div>
+                <h3>@_gameHelper.Game.Player.Name</h3>
+                <PlayerMap @ref="playerMapComponent" Map="@_gameHelper.Game.Player.Map" @onmouseup="_gameHelper.PlayerMapMouseUpHandler" />
+            </div>
+        </div>
+    }
+</div>

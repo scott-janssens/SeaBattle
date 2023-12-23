@@ -1,0 +1,32 @@
+﻿.board-grid {
+    border: 2px solid black;
+    display: grid;
+    column-gap: 0px;
+    width: 100%;
+    grid-template: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px / 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    max-width: 554px;
+    max-height: 554px;
+}
+
+.overlay {
+    display: grid;
+    column-gap: 0px;
+    width: 100%;
+    grid-template-areas: "a";
+    max-width: 554px;
+    max-height: 554px;
+}
+
+.a {
+    grid-area: a;
+}
+
+.map-label {
+    background-color: white;
+    text-align: center;
+    line-height: 50px;
+    font-size: 2rem;
+    border: 1px solid lightsteelblue;
+    max-width: 50px;
+    max-height: 50px;
+}

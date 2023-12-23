@@ -1,0 +1,14 @@
+﻿.system {
+    color: forestgreen;
+    font-weight: 600;
+}
+
+.player {
+    color: blue;
+    font-weight: 600;
+}
+
+.opponent {
+    color: orangered;
+    font-weight: 600;
+}

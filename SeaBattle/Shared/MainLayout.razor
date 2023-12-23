@@ -1,0 +1,60 @@
+﻿@inherits LayoutComponentBase
+
+@using Serilog
+
+@inject NavigationManager Navigation
+
+<style>
+    body {
+        background-image: url(@backgroundUrl);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: black;
+    }
+</style>
+
+<PageTitle>SeaBattle</PageTitle>
+
+<div class="page">
+    <main>
+        <div>
+            <img class="title" src="assets/seabattle-title.png" alt="Sea Battle" />
+        </div>
+        <article class="content px-4">
+            <ErrorBoundary @ref="errorBoundary">
+                <ChildContent>
+                    @Body
+                </ChildContent>
+                <ErrorContent Context="ex">
+                    @{
+                        OnError(@ex);
+                    }
+                    <div class="content-container error">
+                        <p>An error has occured.</p>
+                        <button @onclick='() => Navigation.NavigateTo("Index")'>Reload</button>
+                    </div>
+                </ErrorContent>
+            </ErrorBoundary>
+        </article>
+    </main>
+</div>
+
+@code {
+    #if DEBUG
+    private string backgroundUrl = "../assets/SeaBattle-background2.jpg";
+#else
+    private string backgroundUrl = "/seabattle/assets/SeaBattle-background2.jpg";
+#endif
+
+    private ErrorBoundary? errorBoundary;
+
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
+
+    private void OnError(Exception ex)
+    {
+        Log.Error(ex, "Unhandled exception...");
+    }
+}

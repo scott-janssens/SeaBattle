@@ -1,0 +1,19 @@
+﻿<span>
+    @if (!string.IsNullOrWhiteSpace(@Name))
+    {
+        <span class='@(IsPlayer ? "player" : "opponent")'>@Name: </span>
+        @Content
+    }
+    else
+    {
+        <span class="system">@Content</span>
+    }
+</span>
+
+@code {
+    [Parameter] public bool IsPlayer { get; set; } = default!;
+
+    [Parameter] public string? Name { get; set; }
+
+    [Parameter] public string Content { get; set; } = default!;
+}

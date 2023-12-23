@@ -1,0 +1,17 @@
+﻿.menu-item {
+    margin-bottom: 50px;
+}
+
+label {
+    font-weight: 600;
+}
+
+button {
+    font-size: larger;
+    width: 250px;
+}
+
+    button:disabled {
+        color: lightgray;
+        border: 2px solid lightgray;
+    }

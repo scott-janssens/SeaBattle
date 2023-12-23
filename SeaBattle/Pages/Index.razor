@@ -1,0 +1,26 @@
+﻿@page "/"
+@page "/Index/"
+@page "/Index/{Name}"
+@page "/Index/join/{GameId}"
+@using Microsoft.AspNetCore.Components.Server.Circuits
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+
+@inject NavigationManager Navigation
+@inject IJSRuntime jsRuntime
+@inject ProtectedLocalStorage ProtectedLocalStorage
+@inject ICircuitBroker circuitBroker
+
+<PageTitle>Sea Battle</PageTitle>
+
+<div class="content-container">
+    <div class="menu-item">
+        <label>Name:</label>
+        <input @ref="nameInput" type="text" @bind="Name" @bind:after="NameSet" />
+    </div>
+    <div class="menu-item">
+        <button disabled="@(string.IsNullOrWhiteSpace(Name) || GameId != null)" @onclick='() => Navigation.NavigateTo($"cpugame/{Name}")'>Single-Player Game</button>
+    </div>
+    <div class="menu-item">
+        <button disabled="@(string.IsNullOrWhiteSpace(Name) || GameId != null)" @onclick="SetUp2Player">Two-Player Game</button>
+    </div>
+</div>

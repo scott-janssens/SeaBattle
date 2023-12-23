@@ -1,0 +1,26 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound >
+        <PageTitle>Not found</PageTitle>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <div class="content-container error">
+                <p role="alert">Sorry, there's nothing at this address.</p>
+                <a href="Index" alt="Home">Home</a>
+            </div>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code {
+    public static Action<KeyboardEventArgs>? KeyDownHandler { get; set; }
+
+    [JSInvokable("HandleKeyDown")]
+    public static Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        KeyDownHandler?.Invoke(e);
+        return Task.CompletedTask;
+    }
+}

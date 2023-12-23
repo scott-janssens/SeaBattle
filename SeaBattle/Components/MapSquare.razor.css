@@ -1,0 +1,6 @@
+﻿.map-square {
+    border: 1px solid lightsteelblue;
+    max-width: 50px;
+    max-height: 50px;
+    background-color: skyblue;
+}

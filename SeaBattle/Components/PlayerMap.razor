@@ -1,0 +1,48 @@
+﻿@using SeaBattleEngine;
+@using SeaBattle.Components;
+
+<div class="overlay">
+    <div class="board-grid a">
+        <div class="map-label">&nbsp;</div>
+        <div class="map-label">1</div>
+        <div class="map-label">2</div>
+        <div class="map-label">3</div>
+        <div class="map-label">4</div>
+        <div class="map-label">5</div>
+        <div class="map-label">6</div>
+        <div class="map-label">7</div>
+        <div class="map-label">8</div>
+        <div class="map-label">9</div>
+        <div class="map-label">10</div>
+        @{
+            var enumerator = Map.GetEnumerator();
+            enumerator.MoveNext();
+
+            for (var i = 0; i < 10; i++)
+            {
+                <div class="map-label">@((char)(i + 65))</div>
+
+                for (var c = 0; c < 10; c++, enumerator.MoveNext())
+                {
+                    <MapSquare State="enumerator.Current" />
+                }
+            }
+        }
+    </div>
+    <div class="a">
+        <Ship @ref="carrier" ShipModel="@Map.Carrier" />
+    </div>
+    <div class="a">
+        <Ship @ref="battleship" ShipModel="@Map.Battleship" />
+    </div>
+    <div class="a">
+        <Ship @ref="cruiser" ShipModel="@Map.Cruiser" />
+    </div>
+    <div class="a">
+        <Ship @ref="submarine" ShipModel="@Map.Submarine" />
+    </div>
+    <div class="a">
+        <Ship @ref="destroyer" ShipModel="@Map.Destroyer" />
+    </div>
+    <div class="a" @onmouseup="MouseUpHandler" />
+</div>

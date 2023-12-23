@@ -1,0 +1,30 @@
+﻿@using SeaBattleEngine
+
+<div class="map-square">
+    <svg width=@Size height=@Size xmlns="http://www.w3.org/2000/svg">
+        <circle cx="25" cy="25" r="10" stroke="black" fill="@_color" />
+    </svg>
+</div>
+
+@code {
+    private string _color = "transparent";
+
+    [Parameter]
+    public string Size { get; set; } = "50";
+
+    [Parameter]
+    public CellState State { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+  
+        _color = State switch
+        {
+            CellState.None => "transparent",
+            CellState.Miss => "white",
+            CellState.Hit => "red",
+            _ => throw new NotImplementedException()
+        };
+    }
+}
